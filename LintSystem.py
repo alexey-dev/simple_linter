@@ -13,6 +13,7 @@ class LintSystem :
     def AnalyzeFilesForLintWarnings(self) :
         if self.mFileManager.IsSuccessfullyInited() :
             self.mFileManager.AcceptListOfLintActions(self.mListLintActionsToVisit)
+            self.mFileManager.PrintLintWarningsInfo()
         
     def FixLintWarnings(self) :
         pass

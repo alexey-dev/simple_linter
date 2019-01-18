@@ -24,6 +24,14 @@ class LintingFileManager :
             for CurAction in _listActions :
                 self.mListFilesToLint[i].AcceptVisitor(CurAction)
 
+    def PrintLintWarningsInfo(self) :
+        for i,f in enumerate(self.mListFilesToLint) :
+            CurWarningsList = self.mListFilesToLint[i].GetLiningWarningsList()
+            if len(CurWarningsList) > 0 :
+                self.mListFilesToLint[i].PrintFileWarningsTitle()
+                for CurLintWarning in self.mListFilesToLint[i].GetLiningWarningsList() :
+                    CurLintWarning.GetInfo()
+
     def ReadFiles(self) :
         if not self.IsFilesAlreadyRead() :
             if self.CheckInputData() :

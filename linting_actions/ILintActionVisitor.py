@@ -5,13 +5,13 @@ class AbstractLintActionVisitor(ABC) :
         pass
 
     @abstractmethod
-    def VisitFileLine(self, _line, _listLintWarnings) :
+    def VisitFileLine(self, _numberOfLine, _line, _listLintWarnings) :
         pass
 
     @abstractmethod
-    def VisitFile(self, _listLintWarnings):
+    def VisitFile(self, _listLintWarnings) :
         pass
 
     @abstractmethod
-    def GenerateWarning(self):
+    def GenerateLineWarning(self, _numberOfLine) :
         pass
