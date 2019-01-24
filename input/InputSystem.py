@@ -20,7 +20,7 @@ class AbstractInputSystem(ABC) :
         return self.mFileExtensions
 
     def InitFolderPath(self, _path) :
-        print("initing folder path %s"%(_path))
+        print("Initing folder path is %s"%(_path))
         self.mFolderPath = _path
 
     def ParseInputDataParams(self, _inputParams) :
@@ -41,7 +41,7 @@ class ConsoleInputSystem(AbstractInputSystem) :
         self.ParseInputDataParams(sys.argv)
 
     def ReadParameters(self) :
-        print(sys.argv)
+        pass
 
     def GetFolderPath(self) :
         return self.mFolderPath

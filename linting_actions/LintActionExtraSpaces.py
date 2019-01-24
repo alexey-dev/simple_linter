@@ -7,7 +7,7 @@ class LintWarningExtraSpaces(AbstractLintWarning) :
         self.mNumberOfLine = _numberOfLine
 
     def GetInfo(self) :
-        print(self.mNumberOfLine, "line contains extra spaces at the end")
+        print(" ->", self.mNumberOfLine, "line contains extra spaces at the end")
 
 class LintActionExtraSpaces(AbstractLintActionVisitor) :
     REG_EXTRA_SPACES_PATTERN = r"([ ]+)$"

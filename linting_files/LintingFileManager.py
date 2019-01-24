@@ -25,29 +25,36 @@ class LintingFileManager :
                 self.mListFilesToLint[i].AcceptVisitor(CurAction)
 
     def PrintLintWarningsInfo(self) :
+        print("\nAnalysis results:")
+        TotalWarningsCount = 0
+        TotalFilesCountContainingWarnings = 0
         for i,f in enumerate(self.mListFilesToLint) :
             CurWarningsList = self.mListFilesToLint[i].GetLiningWarningsList()
             if len(CurWarningsList) > 0 :
+                TotalFilesCountContainingWarnings = TotalFilesCountContainingWarnings + 1
+                TotalWarningsCount = TotalWarningsCount + len(CurWarningsList)
                 self.mListFilesToLint[i].PrintFileWarningsTitle()
                 for CurLintWarning in self.mListFilesToLint[i].GetLiningWarningsList() :
                     CurLintWarning.GetInfo()
+        print("\nTotal files containing warning: %d and total warnings count: %d"%(TotalFilesCountContainingWarnings, TotalWarningsCount))
 
     def ReadFiles(self) :
+        print("\nStart reading files before analysis...")
         if not self.IsFilesAlreadyRead() :
             if self.CheckInputData() :
                 TempListApprovedFiles = []
                 for (dirpath, dirnames, filenames) in walk(self.mFolderPath):
-                    print("DirPath is %s \n Dirnames:"%(dirpath))
-                    print(dirnames)
-                    print("Filenames:")
-                    print(filenames)
+                    #print("DirPath is %s \n Dirnames:"%(dirpath))
+                    #print(dirnames)
+                    #print("Filenames:")
+                    #print(filenames)
                     if (len(filenames) > 0) :
-                        TempListApprovedFiles = TempListApprovedFiles + [dirpath + "/" + file for file in filenames if any(str("." + ext) in file for ext in self.mFileExtensions)]
-                        print("Approved files generated:",TempListApprovedFiles)
+                        TempListApprovedFiles = TempListApprovedFiles + [dirpath + "/" + file for file in filenames if any(str("." + ext + "_") in str(file + "_") for ext in self.mFileExtensions)]
+                        #print("Approved files generated:",TempListApprovedFiles)
                 self.mIsFileAlreadyRead = True
-                print(TempListApprovedFiles)
+                #print(TempListApprovedFiles)
                 self.AddNewFilesToLint(TempListApprovedFiles)
-                print("Files to lint:",self.mListFilesToLint)
+                #print("Files to lint:",self.mListFilesToLint)
 
     def CheckInputData(self) :
         if len(self.mFileExtensions) < 0 :
